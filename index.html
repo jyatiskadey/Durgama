@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cludo Technology Consultants - Happy Durga Puja</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden;
+        background: #0a0a0a;
+        min-height: 100vh;
+        cursor: none;
+      }
+
+      /* Custom Cursor */
+      .cursor {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        background: radial-gradient(circle, #ffd700, #ff6b35);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.1s ease;
+        mix-blend-mode: difference;
+      }
+
+      .cursor-follow {
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        border: 2px solid rgba(255, 215, 0, 0.5);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      /* Dynamic Background */
+      .dynamic-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(255, 107, 53, 0.3) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(255, 215, 0, 0.2) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 80%,
+            rgba(139, 0, 0, 0.4) 0%,
+            transparent 50%
+          ),
+          linear-gradient(135deg, #0a0a0a 0%, #1a0505 50%, #0a0a0a 100%);
+        animation: dynamicMove 20s ease-in-out infinite;
+      }
+
+      @keyframes dynamicMove {
+        0%,
+        100% {
+          background: radial-gradient(
+              circle at 20% 50%,
+              rgba(255, 107, 53, 0.3) 0%,
+              transparent 50%
+            ),
+            radial-gradient(
+              circle at 80% 20%,
+              rgba(255, 215, 0, 0.2) 0%,
+              transparent 50%
+            ),
+            radial-gradient(
+              circle at 40% 80%,
+              rgba(139, 0, 0, 0.4) 0%,
+              transparent 50%
+            ),
+            linear-gradient(135deg, #0a0a0a 0%, #1a0505 50%, #0a0a0a 100%);
+        }
+        50% {
+          background: radial-gradient(
+              circle at 80% 30%,
+              rgba(255, 107, 53, 0.4) 0%,
+              transparent 50%
+            ),
+            radial-gradient(
+              circle at 20% 80%,
+              rgba(255, 215, 0, 0.3) 0%,
+              transparent 50%
+            ),
+            radial-gradient(
+              circle at 60% 20%,
+              rgba(139, 0, 0, 0.3) 0%,
+              transparent 50%
+            ),
+            linear-gradient(135deg, #0a0a0a 0%, #0a1a05 50%, #0a0a0a 100%);
+        }
+      }
+
+      /* Floating Orbs */
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(1px);
+        animation: orbFloat 15s ease-in-out infinite;
+        opacity: 0.6;
+      }
+
+      .orb:nth-child(1) {
+        width: 60px;
+        height: 60px;
+        background: radial-gradient(circle, #ffd700, transparent);
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
+      }
+
+      .orb:nth-child(2) {
+        width: 40px;
+        height: 40px;
+        background: radial-gradient(circle, #ff6b35, transparent);
+        top: 60%;
+        right: 15%;
+        animation-delay: 5s;
+      }
+
+      .orb:nth-child(3) {
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(circle, rgba(139, 0, 0, 0.5), transparent);
+        bottom: 20%;
+        left: 15%;
+        animation-delay: 10s;
+      }
+
+      @keyframes orbFloat {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+          opacity: 0.6;
+        }
+        25% {
+          transform: translate(30px, -30px) scale(1.1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: translate(-20px, -50px) scale(0.9);
+          opacity: 0.4;
+        }
+        75% {
+          transform: translate(50px, 20px) scale(1.05);
+          opacity: 0.7;
+        }
+      }
+
+      /* Welcome Screen */
+      .welcome-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(
+          135deg,
+          rgba(10, 10, 10, 0.95),
+          rgba(26, 5, 5, 0.95)
+        );
+        backdrop-filter: blur(10px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .welcome-screen.hidden {
+        opacity: 0;
+        transform: scale(0.8) rotateY(90deg);
+        pointer-events: none;
+      }
+
+      .logo-container {
+        position: relative;
+        margin-bottom: 4rem;
+        animation: logoMagicEntrance 3s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+          forwards;
+        opacity: 0;
+      }
+
+      .logo {
+        width: 250px;
+        height: 250px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.05)
+        );
+        backdrop-filter: blur(20px);
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 80px rgba(255, 215, 0, 0.3),
+          0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        position: relative;
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        overflow: hidden;
+      }
+
+      .logo::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: conic-gradient(
+          from 0deg,
+          transparent,
+          rgba(255, 215, 0, 0.3),
+          transparent
+        );
+        animation: logoRotate 4s linear infinite;
+      }
+
+      .logo::after {
+        content: "";
+        position: absolute;
+        inset: 2px;
+        background: linear-gradient(
+          135deg,
+          rgba(10, 10, 10, 0.8),
+          rgba(26, 5, 5, 0.8)
+        );
+        border-radius: 28px;
+        backdrop-filter: blur(10px);
+      }
+
+      .logo-svg {
+        width: 140px;
+        height: 140px;
+        z-index: 2;
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+        animation: logoFloat 3s ease-in-out infinite;
+      }
+
+      @keyframes logoMagicEntrance {
+        0% {
+          opacity: 0;
+          transform: scale(0.3) rotateX(-90deg) rotateY(180deg);
+        }
+        50% {
+          transform: scale(1.2) rotateX(-45deg) rotateY(90deg);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) rotateX(0deg) rotateY(0deg);
+        }
+      }
+
+      @keyframes logoRotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes logoFloat {
+        0%,
+        100% {
+          transform: translateY(0) rotateZ(0deg);
+        }
+        50% {
+          transform: translateY(-10px) rotateZ(2deg);
+        }
+      }
+
+      .welcome-text {
+        text-align: center;
+        margin-bottom: 4rem;
+        animation: textSlideUp 2.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.8s
+          forwards;
+        opacity: 0;
+      }
+
+      .welcome-text h1 {
+        font-family: "Orbitron", monospace;
+        font-size: 3.5rem;
+        font-weight: 900;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #ffd700, #ff6b35, #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        background-size: 200% 200%;
+        animation: textShimmer 3s ease-in-out infinite;
+        text-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+      }
+
+      .welcome-text p {
+        font-size: 1.4rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 300;
+        letter-spacing: 1px;
+      }
+
+      @keyframes textSlideUp {
+        0% {
+          opacity: 0;
+          transform: translateY(100px) rotateX(90deg);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) rotateX(0deg);
+        }
+      }
+
+      @keyframes textShimmer {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      .enter-btn {
+        padding: 1.5rem 4rem;
+        font-size: 1.3rem;
+        font-family: "Orbitron", monospace;
+        font-weight: 700;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 107, 53, 0.2),
+          rgba(255, 215, 0, 0.2)
+        );
+        color: #ffd700;
+        border: 2px solid rgba(255, 215, 0, 0.3);
+        border-radius: 50px;
+        cursor: none;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 15px 35px rgba(255, 107, 53, 0.3);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        position: relative;
+        overflow: hidden;
+        animation: btnMagicPulse 3s ease-in-out infinite 2s;
+      }
+
+      .enter-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .enter-btn:hover {
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: 0 25px 50px rgba(255, 107, 53, 0.5);
+        border-color: rgba(255, 215, 0, 0.8);
+        background: linear-gradient(
+          135deg,
+          rgba(255, 107, 53, 0.3),
+          rgba(255, 215, 0, 0.3)
+        );
+      }
+
+      .enter-btn:hover::before {
+        left: 100%;
+      }
+
+      @keyframes btnMagicPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 15px 35px rgba(255, 107, 53, 0.3);
+        }
+        50% {
+          transform: scale(1.02);
+          box-shadow: 0 20px 40px rgba(255, 107, 53, 0.5);
+        }
+      }
+
+      /* Main Content */
+      .main-content {
+        min-height: 100vh;
+        position: relative;
+        z-index: 10;
+        padding: 2rem;
+      }
+
+      .header {
+        text-align: center;
+        padding: 4rem 0;
+        animation: headerSlide 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+          forwards;
+        opacity: 0;
+      }
+
+      .header h1 {
+        font-family: "Orbitron", monospace;
+        font-size: 5rem;
+        font-weight: 900;
+        margin-bottom: 2rem;
+        background: linear-gradient(135deg, #ffd700, #ff6b35, #8b0000, #ffd700);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        background-size: 300% 300%;
+        animation: headerGlow 4s ease-in-out infinite;
+        text-shadow: 0 0 100px rgba(255, 215, 0, 0.5);
+        position: relative;
+      }
+
+      .header h1::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 4px;
+        background: linear-gradient(90deg, transparent, #ffd700, transparent);
+        animation: underlineGlow 3s ease-in-out infinite;
+      }
+
+      .header p {
+        font-size: 1.6rem;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 300;
+        letter-spacing: 1px;
+      }
+
+      @keyframes headerSlide {
+        0% {
+          opacity: 0;
+          transform: translateY(-150px) rotateX(-90deg);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) rotateX(0deg);
+        }
+      }
+
+      @keyframes headerGlow {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+
+      @keyframes underlineGlow {
+        0%,
+        100% {
+          opacity: 0.5;
+          transform: translateX(-50%) scaleX(1);
+        }
+        50% {
+          opacity: 1;
+          transform: translateX(-50%) scaleX(1.5);
+        }
+      }
+
+      /* Celebration Cards */
+      .celebration-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 3rem;
+        padding: 4rem 0;
+      }
+
+      .wish-card {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.05),
+          rgba(255, 255, 255, 0.02)
+        );
+        backdrop-filter: blur(20px);
+        border-radius: 25px;
+        padding: 3rem;
+        text-align: center;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        animation: cardFloat 2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        opacity: 0;
+        transform: translateY(100px) rotateX(45deg);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .wish-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 215, 0, 0.1) 0%,
+          transparent 70%
+        );
+        transform: scale(0);
+        transition: transform 0.8s ease;
+      }
+
+      .wish-card:hover::before {
+        transform: scale(1);
+      }
+
+      .wish-card:nth-child(1) {
+        animation-delay: 0.3s;
+      }
+      .wish-card:nth-child(2) {
+        animation-delay: 0.6s;
+      }
+      .wish-card:nth-child(3) {
+        animation-delay: 0.9s;
+      }
+
+      .wish-card:hover {
+        transform: translateY(-20px) scale(1.02);
+        box-shadow: 0 40px 80px rgba(255, 215, 0, 0.2),
+          0 0 50px rgba(255, 107, 53, 0.3);
+        border-color: rgba(255, 215, 0, 0.5);
+      }
+
+      @keyframes cardFloat {
+        0% {
+          opacity: 0;
+          transform: translateY(100px) rotateX(45deg);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) rotateX(0deg);
+        }
+      }
+
+      .card-icon {
+        font-size: 4rem;
+        margin-bottom: 2rem;
+        display: block;
+        animation: iconSpin 4s ease-in-out infinite;
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+      }
+
+      @keyframes iconSpin {
+        0%,
+        100% {
+          transform: rotate(0deg) scale(1);
+          filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
+        }
+        25% {
+          transform: rotate(5deg) scale(1.1);
+          filter: drop-shadow(0 0 30px rgba(255, 107, 53, 0.7));
+        }
+        50% {
+          transform: rotate(0deg) scale(1.05);
+          filter: drop-shadow(0 0 25px rgba(139, 0, 0, 0.6));
+        }
+        75% {
+          transform: rotate(-5deg) scale(1.1);
+          filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.7));
+        }
+      }
+
+      .wish-card h3 {
+        font-family: "Orbitron", monospace;
+        color: #ffd700;
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+      }
+
+      .wish-card p {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.8;
+        font-size: 1.1rem;
+        font-weight: 300;
+      }
+
+      /* Interactive Elements */
+      .interactive-diya {
+        position: fixed;
+        font-size: 2.5rem;
+        pointer-events: none;
+        z-index: 5;
+        animation: divaFlicker 2s ease-in-out infinite;
+        filter: drop-shadow(0 0 15px rgba(255, 165, 0, 0.8));
+      }
+
+      .interactive-diya:nth-child(1) {
+        top: 15%;
+        left: 5%;
+        animation-delay: 0s;
+      }
+      .interactive-diya:nth-child(2) {
+        top: 70%;
+        right: 8%;
+        animation-delay: 1s;
+      }
+      .interactive-diya:nth-child(3) {
+        bottom: 20%;
+        left: 10%;
+        animation-delay: 2s;
+      }
+      .interactive-diya:nth-child(4) {
+        top: 40%;
+        right: 15%;
+        animation-delay: 1.5s;
+      }
+
+      @keyframes divaFlicker {
+        0%,
+        100% {
+          transform: scale(1) rotate(0deg);
+          filter: drop-shadow(0 0 15px rgba(255, 165, 0, 0.8));
+        }
+        25% {
+          transform: scale(1.1) rotate(2deg);
+          filter: drop-shadow(0 0 25px rgba(255, 215, 0, 1));
+        }
+        50% {
+          transform: scale(0.95) rotate(-1deg);
+          filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.6));
+        }
+        75% {
+          transform: scale(1.05) rotate(1deg);
+          filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.9));
+        }
+      }
+
+      /* Company Footer */
+      .company-footer {
+        text-align: center;
+        padding: 4rem 2rem;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.6),
+          rgba(26, 5, 5, 0.4)
+        );
+        backdrop-filter: blur(20px);
+        margin-top: 4rem;
+        border-top: 1px solid rgba(255, 215, 0, 0.2);
+      }
+
+      .company-footer .logo-small {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.05)
+        );
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        transition: all 0.4s ease;
+      }
+
+      .company-footer .logo-small:hover {
+        transform: scale(1.1) rotate(5deg);
+        box-shadow: 0 25px 50px rgba(255, 215, 0, 0.4);
+      }
+
+      .footer-logo-svg {
+        width: 45px;
+        height: 45px;
+        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.3));
+      }
+
+      .company-footer h2 {
+        font-family: "Orbitron", monospace;
+        color: #ffd700;
+        font-size: 2.5rem;
+        font-weight: 900;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+      }
+
+      .company-footer p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.2rem;
+        font-weight: 300;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 3rem;
+        }
+        .welcome-text h1 {
+          font-size: 2.5rem;
+        }
+        .celebration-container {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+          padding: 2rem 0;
+        }
+        .wish-card {
+          padding: 2rem;
+        }
+        .main-content {
+          padding: 1rem;
+        }
+        .logo {
+          width: 200px;
+          height: 200px;
+        }
+        .logo-svg {
+          width: 100px;
+          height: 100px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header h1 {
+          font-size: 2.5rem;
+        }
+        .welcome-text h1 {
+          font-size: 2rem;
+        }
+        .enter-btn {
+          padding: 1rem 2.5rem;
+          font-size: 1.1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follow"></div>
+
+    <!-- Dynamic Background -->
+    <div class="dynamic-bg">
+      <div class="orb"></div>
+      <div class="orb"></div>
+      <div class="orb"></div>
+    </div>
+
+    <!-- Interactive Diyas -->
+    <div class="interactive-diya">🪔</div>
+    <div class="interactive-diya">🪔</div>
+    <div class="interactive-diya">🪔</div>
+    <div class="interactive-diya">🪔</div>
+
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+      <div class="logo-container">
+        <div class="logo">
+          <img src="/download.png" alt="" />
+        </div>
+      </div>
+      <div class="welcome-text">
+        <h1>Cludo Technology Consultants</h1>
+        <p>Welcome to the Divine Celebration</p>
+      </div>
+      <button class="enter-btn" onclick="enterCelebration()">
+        Enter Sacred Journey
+      </button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <header class="header">
+        <h1>🙏 HAPPY DURGA PUJA 🙏</h1>
+        <p>
+          May Maa Durga's divine blessings illuminate your path to success and
+          happiness
+        </p>
+      </header>
+
+      <div class="celebration-container">
+        <!-- Left: Hindi Mantra -->
+        <div class="wish-card">
+          <span class="card-icon">🕉️</span>
+          <h3>माँ दुर्गा मंत्र</h3>
+          <p>
+            ॐ ऐं ह्रीं क्लीं चामुण्डायै विच्चे <br />
+            माँ दुर्गा का आशीर्वाद आपके जीवन में सुख, शक्ति और विजय लाए।
+          </p>
+        </div>
+
+        <!-- Center: Maa Durga Image -->
+        <div class="wish-card image-card">
+          <img src="https://i.pinimg.com/736x/e3/a1/59/e3a159b291753dc94eb02ebe1e4faa0e.jpg" alt="Maa Durga" height="350" width="350" />
+          <h3>🌺 जय माँ दुर्गा 🌺</h3>
+        </div>
+
+        <!-- Right: Bengali Mantra -->
+        <div class="wish-card">
+          <span class="card-icon">🔱</span>
+          <h3>মা দুর্গার আশীর্বাদ</h3>
+          <p>
+            ॐ জয়ন্তী মঙ্গলাকালী ভদ্রকালী কপালিনী । <br />
+            দুর্গা ক্ষমা শিবা ধাত্রী স্বাহা স্বাধা নমোঽস্তুতে ॥ <br /><br />
+            মা দুর্গার কৃপায় আপনার জীবন হোক আনন্দ, শান্তি ও সাফল্যে পূর্ণ।
+          </p>
+        </div>
+      </div>
+
+      <div class="company-footer">
+        <div class="logo-small">
+          <img src="/download.png" alt="" />
+        </div>
+        <h2>Cludo Technology Consultants</h2>
+        <p>
+          Wishing everyone a blessed and prosperous Durga Puja filled with
+          divine grace
+        </p>
+      </div>
+    </div>
+
+    <script>
+      // Custom Cursor Animation
+      const cursor = document.querySelector(".cursor");
+      const cursorFollow = document.querySelector(".cursor-follow");
+
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+
+        setTimeout(() => {
+          cursorFollow.style.left = e.clientX - 20 + "px";
+          cursorFollow.style.top = e.clientY - 20 + "px";
+        }, 100);
+      });
+
+      // Cursor hover effects
+      document
+        .querySelectorAll("button, .wish-card, .logo-small")
+        .forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            cursor.style.transform = "scale(1.5)";
+            cursorFollow.style.transform = "scale(1.5)";
+            cursorFollow.style.borderColor = "rgba(255, 215, 0, 0.8)";
+          });
+
+          el.addEventListener("mouseleave", () => {
+            cursor.style.transform = "scale(1)";
+            cursorFollow.style.transform = "scale(1)";
+            cursorFollow.style.borderColor = "rgba(255, 215, 0, 0.5)";
+          });
+        });
+
+      // Advanced Enter Celebration Function
+      function enterCelebration() {
+        const welcomeScreen = document.getElementById("welcomeScreen");
+
+        // Add dramatic exit animation
+        welcomeScreen.style.animation =
+          "screenExit 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards";
+
+        // Create particle burst effect
+        createParticleBurst();
+
+        setTimeout(() => {
+          welcomeScreen.classList.add("hidden");
+
+          // Trigger main content animations
+          document.querySelector(".header").style.animationPlayState =
+            "running";
+
+          // Staggered card animations
+          document.querySelectorAll(".wish-card").forEach((card, index) => {
+            setTimeout(() => {
+              card.style.animationPlayState = "running";
+            }, index * 300);
+          });
+
+          // Add scroll reveal animations
+          setupScrollAnimations();
+        }, 800);
+      }
+
+      // Particle Burst Effect
+      function createParticleBurst() {
+        const colors = ["#FFD700", "#FF6B35", "#8B0000", "#FFA500"];
+
+        for (let i = 0; i < 50; i++) {
+          const particle = document.createElement("div");
+          particle.style.position = "fixed";
+          particle.style.width = Math.random() * 8 + 4 + "px";
+          particle.style.height = particle.style.width;
+          particle.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
+          particle.style.borderRadius = "50%";
+          particle.style.left = "50%";
+          particle.style.top = "50%";
+          particle.style.pointerEvents = "none";
+          particle.style.zIndex = "9999";
+
+          const angle = (Math.PI * 2 * i) / 50;
+          const velocity = Math.random() * 300 + 200;
+          const vx = Math.cos(angle) * velocity;
+          const vy = Math.sin(angle) * velocity;
+
+          document.body.appendChild(particle);
+
+          particle.animate(
+            [
+              {
+                transform: "translate(-50%, -50%) scale(0)",
+                opacity: 1,
+              },
+              {
+                transform: `translate(calc(-50% + ${vx}px), calc(-50% + ${vy}px)) scale(1)`,
+                opacity: 0,
+              },
+            ],
+            {
+              duration: 1000,
+              easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            }
+          ).onfinish = () => {
+            particle.remove();
+          };
+        }
+      }
+
+      // Advanced Scroll Animations
+      function setupScrollAnimations() {
+        const observerOptions = {
+          threshold: 0.1,
+          rootMargin: "0px 0px -50px 0px",
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.style.animation =
+                "fadeInUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards";
+            }
+          });
+        }, observerOptions);
+
+        document.querySelectorAll(".wish-card").forEach((card) => {
+          observer.observe(card);
+        });
+      }
+
+      // Interactive Card 3D Effects
+      document.querySelectorAll(".wish-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const rotateX = (y - centerY) / 10;
+          const rotateY = -(x - centerX) / 10;
+
+          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-20px) scale(1.02)`;
+        });
+
+        card.addEventListener("mouseleave", () => {
+          card.style.transform =
+            "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)";
+        });
+      });
+
+      // Dynamic Background Color Changes
+      let colorIndex = 0;
+      const backgroundColors = [
+        "radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.3) 0%, transparent 50%)",
+        "radial-gradient(circle at 80% 30%, rgba(255, 215, 0, 0.4) 0%, transparent 50%)",
+        "radial-gradient(circle at 40% 80%, rgba(139, 0, 0, 0.3) 0%, transparent 50%)",
+        "radial-gradient(circle at 60% 20%, rgba(255, 165, 0, 0.3) 0%, transparent 50%)",
+      ];
+
+      // Floating Diyas Interactive Effect
+      document.querySelectorAll(".interactive-diya").forEach((diya, index) => {
+        diya.addEventListener("click", () => {
+          createDiyaSparkles(diya);
+        });
+      });
+
+      function createDiyaSparkles(diya) {
+        const rect = diya.getBoundingClientRect();
+
+        for (let i = 0; i < 12; i++) {
+          const sparkle = document.createElement("div");
+          sparkle.innerHTML = "✨";
+          sparkle.style.position = "fixed";
+          sparkle.style.left = rect.left + rect.width / 2 + "px";
+          sparkle.style.top = rect.top + rect.height / 2 + "px";
+          sparkle.style.pointerEvents = "none";
+          sparkle.style.zIndex = "9999";
+          sparkle.style.fontSize = "1rem";
+
+          document.body.appendChild(sparkle);
+
+          const angle = (Math.PI * 2 * i) / 12;
+          const distance = 100;
+          const x = Math.cos(angle) * distance;
+          const y = Math.sin(angle) * distance;
+
+          sparkle.animate(
+            [
+              {
+                transform: "translate(-50%, -50%) scale(0) rotate(0deg)",
+                opacity: 1,
+              },
+              {
+                transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1) rotate(360deg)`,
+                opacity: 0,
+              },
+            ],
+            {
+              duration: 1200,
+              easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            }
+          ).onfinish = () => {
+            sparkle.remove();
+          };
+        }
+      }
+
+      // Add additional CSS animations for screen exit
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes screenExit {
+                0% { 
+                    opacity: 1; 
+                    transform: scale(1) rotateY(0deg);
+                    filter: blur(0px);
+                }
+                50% { 
+                    opacity: 0.5; 
+                    transform: scale(1.1) rotateY(45deg);
+                    filter: blur(2px);
+                }
+                100% { 
+                    opacity: 0; 
+                    transform: scale(0.8) rotateY(90deg);
+                    filter: blur(10px);
+                }
+            }
+            
+            @keyframes fadeInUp {
+                0% {
+                    opacity: 0;
+                    transform: translateY(50px) rotateX(20deg);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0) rotateX(0deg);
+                }
+            }
+        `;
+      document.head.appendChild(style);
+
+      // Initialize on page load
+      window.addEventListener("load", () => {
+        // Add loading complete class for additional animations
+        document.body.classList.add("loaded");
+      });
+
+      // Keyboard accessibility
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          if (
+            !document
+              .getElementById("welcomeScreen")
+              .classList.contains("hidden")
+          ) {
+            enterCelebration();
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
